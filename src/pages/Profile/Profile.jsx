@@ -49,10 +49,10 @@ export default function Profile() {
   };
 
   useEffect(() => {
-    if (userData?._id) {
+    if (userData?._id && !isLoading) {
       getPost();
     }
-  }, [userData]);
+  }, [userData, isLoading]);
 
   const resetPassword = async () => {
     const passwordData = {
@@ -108,7 +108,7 @@ export default function Profile() {
     photo: userData?.photo || "",
   };
 
-  if (!userData) {
+  if (isLoading || !userData) {
     return (
       <main className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
         <PostSkeleton />

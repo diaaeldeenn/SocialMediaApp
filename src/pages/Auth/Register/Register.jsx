@@ -38,7 +38,7 @@ export default function Register() {
       const token = res.data.token;
       localStorage.setItem("userToken", token);
       toast.success("Account Created Successfully!", { position: "top-center" });
-      navigate("/home", { replace: true });
+      navigate("/login", { replace: true });
       reset();
     } catch (error) {
       console.log(error.response?.data);

@@ -6,13 +6,13 @@ export const userContext = createContext();
 export default function UserContextProvider({ children }) {
   const [userData, setUserData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [token, setToken] = useState(localStorage.getItem("userToken"));
+
 
   async function getUserData() {
     setIsLoading(true);
     try {
       const res = await getProfile();
-      console.log("User data fetched:", res.data.user); // Debug log
+      console.log("User data fetched:", res.data.user);
       setUserData(res.data.user);
     } catch (error) {
       console.error("Error fetching user data:", error);
