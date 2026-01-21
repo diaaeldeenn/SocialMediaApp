@@ -7,14 +7,11 @@ export default function UserContextProvider({ children }) {
   const [userData, setUserData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
-
   async function getUserData() {
-    setIsLoading(true);
     try {
       const res = await getProfile();
       setUserData(res.data.user);
     } catch (error) {
-      console.error("Error fetching user data:", error);
       setUserData(null);
     } finally {
       setIsLoading(false);
@@ -22,16 +19,20 @@ export default function UserContextProvider({ children }) {
   }
 
   useEffect(() => {
-    const currentToken = localStorage.getItem("userToken");
-    if (currentToken) {
+    const token = localStorage.getItem("userToken");
+    if (token) {
       getUserData();
     } else {
       setIsLoading(false);
     }
   }, []);
 
+  if (isLoading) {
+    return null;
+  }
+
   return (
-    <userContext.Provider value={{ userData, setUserData, isLoading }}>
+    <userContext.Provider value={{ userData, setUserData }}>
       {children}
     </userContext.Provider>
   );
