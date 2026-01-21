@@ -24,9 +24,6 @@ export default function PostModal({ isOpen, onOpenChange, getAllPosts, post }) {
   const { userData } = useContext(userContext);
 
 
-  if (!userData) {
-    return null;
-  }
 
   function chooseFile() {
     const file = fileInput.current.files[0];
@@ -84,13 +81,13 @@ export default function PostModal({ isOpen, onOpenChange, getAllPosts, post }) {
               {/* User Info */}
               <div className="flex items-center gap-3 mb-4">
                 <img
-                  src={userData.photo}
+                  src={userData?.photo}
                   className="w-12 h-12 rounded-full ring-2 ring-blue-500/20"
                   alt="user"
                 />
                 <div className="flex flex-col">
                   <span className="font-semibold text-gray-800 dark:text-white">
-                    {userData.name}
+                    {userData?.name}
                   </span>
                   <span className="text-sm text-gray-500 dark:text-gray-400">
                     Public
@@ -103,7 +100,7 @@ export default function PostModal({ isOpen, onOpenChange, getAllPosts, post }) {
                 defaultValue={post?.body}
                 ref={postInput}
                 minRows={selectedFile ? 3 : 6}
-                placeholder={`What's on your mind, ${userData.name}?`}
+                placeholder={`What's on your mind, ${userData?.name}?`}
                 classNames={{
                   input: "dark:text-white text-lg",
                   inputWrapper:

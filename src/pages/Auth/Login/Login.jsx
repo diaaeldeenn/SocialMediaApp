@@ -1,6 +1,6 @@
 import { Button, Input } from "@heroui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { IoEye, IoEyeOff } from "react-icons/io5";
@@ -9,11 +9,12 @@ import { loginSchema } from "../../../lib/schema/authSchema.js";
 import { signIn } from "../../../services/api/auth.api.js";
 import { toast } from "react-toastify";
 import { motion } from "framer-motion";
-
+import { userContext } from "../../../context/UserContext/UserContext.jsx";
 
 export default function Login() {
   const navigate = useNavigate();
   const [eyeePassowrd, setEyeePassowrd] = useState(false);
+  const { refreshUserData } = useContext(userContext);
   const {
     register,
     handleSubmit,
@@ -32,6 +33,7 @@ export default function Login() {
       const token = res.data.token;
       localStorage.setItem("userToken", token);
       toast.success("Logged In Successfully", { position: "top-center" });
+      refreshUserData();
       navigate("/home", { replace: true });
     } catch (error) {
       console.log(error.response?.data);
@@ -46,9 +48,7 @@ export default function Login() {
       transition={{ duration: 0.5 }}
       className="w-full"
     >
-      {/* Card Container */}
       <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-8 lg:p-10 backdrop-blur-lg border border-gray-100 dark:border-gray-700">
-        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -63,7 +63,6 @@ export default function Login() {
           </p>
         </motion.div>
 
-        {/* Form */}
         <form className="space-y-6" onSubmit={handleSubmit(setForms)}>
           <motion.div
             initial={{ opacity: 0, x: -20 }}
@@ -83,7 +82,8 @@ export default function Login() {
               classNames={{
                 input: "dark:text-white",
                 label: "dark:text-gray-300",
-                inputWrapper: "dark:bg-gray-700 dark:border-gray-600 hover:dark:bg-gray-600",
+                inputWrapper:
+                  "dark:bg-gray-700 dark:border-gray-600 hover:dark:bg-gray-600",
               }}
               variant="bordered"
               size="lg"
@@ -118,7 +118,8 @@ export default function Login() {
               classNames={{
                 input: "dark:text-white",
                 label: "dark:text-gray-300",
-                inputWrapper: "dark:bg-gray-700 dark:border-gray-600 hover:dark:bg-gray-600",
+                inputWrapper:
+                  "dark:bg-gray-700 dark:border-gray-600 hover:dark:bg-gray-600",
               }}
               variant="bordered"
               size="lg"
@@ -141,7 +142,6 @@ export default function Login() {
           </motion.div>
         </form>
 
-        {/* Divider */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -153,12 +153,11 @@ export default function Login() {
           </div>
           <div className="relative flex justify-center text-sm">
             <span className="px-4 bg-white dark:bg-gray-800 text-gray-500 dark:text-gray-400">
-              New to Sphere?
+              New to Nexify?
             </span>
           </div>
         </motion.div>
 
-        {/* Sign Up Link */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -177,7 +176,6 @@ export default function Login() {
         </motion.div>
       </div>
 
-      {/* Decorative Elements */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

@@ -9,6 +9,7 @@ import {
   DropdownMenu,
   Avatar,
   Badge,
+  Skeleton,
 } from "@heroui/react";
 import { FiSearch } from "react-icons/fi";
 import { IoNotifications, IoMoon, IoSunny } from "react-icons/io5";
@@ -23,16 +24,12 @@ export default function Navbar() {
   const navigate = useNavigate();
   const location = useLocation();
   const isProfilePage = location.pathname === "/profile";
-  const { userData } = useContext(userContext);
+  const { userData, isLoading } = useContext(userContext);
   const { theme, toggleTheme } = useTheme();
 
   function logOut() {
     localStorage.removeItem("userToken");
     navigate("/login", { replace: true });
-  }
-
-  if (!userData) {
-    return null;
   }
 
   return (
@@ -104,61 +101,65 @@ export default function Navbar() {
         </motion.div>
 
         {/* User Menu */}
-        <Dropdown placement="bottom-end">
-          <DropdownTrigger className="cursor-pointer">
-            <Avatar
-              isBordered
-              as="button"
-              className="transition-transform hover:scale-105"
-              color="primary"
-              name={userData.name}
-              size="sm"
-              src={userData.photo}
-            />
-          </DropdownTrigger>
-          <DropdownMenu
-            aria-label="Profile Actions"
-            variant="flat"
-            className="dark:bg-gray-800"
-          >
-            <DropdownItem
-              key="profile"
-              className="h-14 gap-2 dark:text-white"
-              textValue="User Info"
-            >
-              <p className="font-semibold dark:text-gray-300">Signed in as</p>
-              <p className="font-semibold dark:text-gray-400">
-                {userData.email}
-              </p>
-            </DropdownItem>
-
-            {isProfilePage && (
-              <DropdownItem
-                key="home"
-                color="success"
-                onClick={() => navigate("/home")}
-                className="dark:text-white"
-              >
-                Home
-              </DropdownItem>
-            )}
-
-            {!isProfilePage && (
-              <DropdownItem
-                key="settings"
+        {isLoading || !userData ? (
+          <Skeleton className="rounded-full w-8 h-8 dark:bg-gray-700" />
+        ) : (
+          <Dropdown placement="bottom-end">
+            <DropdownTrigger className="cursor-pointer">
+              <Avatar
+                isBordered
+                as="button"
+                className="transition-transform hover:scale-105"
                 color="primary"
-                onClick={() => navigate("/profile")}
-                className="dark:text-white"
+                name={userData.name}
+                size="sm"
+                src={userData.photo}
+              />
+            </DropdownTrigger>
+            <DropdownMenu
+              aria-label="Profile Actions"
+              variant="flat"
+              className="dark:bg-gray-800"
+            >
+              <DropdownItem
+                key="profile"
+                className="h-14 gap-2 dark:text-white"
+                textValue="User Info"
               >
-                My Profile
+                <p className="font-semibold dark:text-gray-300">Signed in as</p>
+                <p className="font-semibold dark:text-gray-400">
+                  {userData.email}
+                </p>
               </DropdownItem>
-            )}
 
-            <DropdownItem key="logout" color="danger" onClick={logOut}>
-              Log Out
-            </DropdownItem>
-          </DropdownMenu>
-        </Dropdown>
+              {isProfilePage && (
+                <DropdownItem
+                  key="home"
+                  color="success"
+                  onClick={() => navigate("/home")}
+                  className="dark:text-white"
+                >
+                  Home
+                </DropdownItem>
+              )}
+
+              {!isProfilePage && (
+                <DropdownItem
+                  key="settings"
+                  color="primary"
+                  onClick={() => navigate("/profile")}
+                  className="dark:text-white"
+                >
+                  My Profile
+                </DropdownItem>
+              )}
+
+              <DropdownItem key="logout" color="danger" onClick={logOut}>
+                Log Out
+              </DropdownItem>
+            </DropdownMenu>
+          </Dropdown>
+        )}
       </NavbarContent>
     </NavUI>
   );
