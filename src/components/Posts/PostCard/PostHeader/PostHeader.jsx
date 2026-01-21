@@ -49,7 +49,7 @@ export default function PostHeader({ post, getAllPosts }) {
           </p>
         </div>
       </div>
-      {userData._id === post.user._id && (
+      {userData?._id === post?.user?._id && (
         <Dropdown placement="bottom-end">
           <DropdownTrigger className="cursor-pointer">
             <motion.button
