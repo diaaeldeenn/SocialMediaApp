@@ -7,7 +7,7 @@ export default function AuthProtectedRoutes({ children }) {
   useEffect(() => {
     const token = localStorage.getItem("userToken");
     if (token) {
-      navigate("/home", { replace: true });
+      navigate("/login", { replace: true });
     }
   }, [navigate]);
 
