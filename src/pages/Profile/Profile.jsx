@@ -207,51 +207,103 @@ export default function Profile() {
                 </CardHeader>
                 <Divider className="dark:bg-gray-700" />
                 <CardBody className="px-6 py-6 space-y-4">
-                  <div className="flex items-center gap-4 p-4 bg-gray-50 dark:bg-gray-700/50 rounded-2xl">
+                  <motion.div whileHover={{ scale: 1.02 }} className="hover:shadow-md transition-all cursor-pointer flex items-center gap-4 p-4 bg-gray-50 dark:bg-gray-700/50 rounded-2xl">
                     <div className="p-3 bg-blue-100 dark:bg-blue-900/50 rounded-xl">
                       <FiUser className="text-xl text-blue-600 dark:text-blue-400" />
                     </div>
                     <div>
-                      <p className="text-xs text-gray-500 uppercase font-medium">Full Name</p>
-                      <p className="text-gray-800 dark:text-white font-semibold mt-1">{user.name}</p>
+                      <p className="text-xs text-gray-500 uppercase font-medium">
+                        Full Name
+                      </p>
+                      <p className="text-gray-800 dark:text-white font-semibold mt-1">
+                        {user.name}
+                      </p>
                     </div>
-                  </div>
-                  <div className="flex items-center gap-4 p-4 bg-gray-50 dark:bg-gray-700/50 rounded-2xl">
+                  </motion.div>
+                  <motion.div whileHover={{ scale: 1.02 }} className="hover:shadow-md transition-all cursor-pointer flex items-center gap-4 p-4 bg-gray-50 dark:bg-gray-700/50 rounded-2xl">
                     <div className="p-3 bg-green-100 dark:bg-green-900/50 rounded-xl">
                       <FiMail className="text-xl text-green-600 dark:text-green-400" />
                     </div>
                     <div>
-                      <p className="text-xs text-gray-500 uppercase font-medium">Email Address</p>
-                      <p className="text-gray-800 dark:text-white font-semibold mt-1">{user.email}</p>
+                      <p className="text-xs text-gray-500 uppercase font-medium">
+                        Email Address
+                      </p>
+                      <p className="text-gray-800 dark:text-white font-semibold mt-1">
+                        {user.email}
+                      </p>
                     </div>
-                  </div>
+                  </motion.div>
+                  <motion.div
+                    whileHover={{ scale: 1.02 }}
+                    className="flex items-center gap-4 p-4 bg-gray-50 dark:bg-gray-700/50 rounded-2xl hover:shadow-md transition-all cursor-pointer"
+                  >
+                    <div className="p-3 bg-purple-100 dark:bg-purple-900/50 rounded-xl">
+                      <FiCalendar className="text-xl text-purple-600 dark:text-purple-400" />
+                    </div>
+                    <div>
+                      <p className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wider font-medium">
+                        Date of Birth
+                      </p>
+                      <p className="text-gray-800 dark:text-white font-semibold mt-1">
+                        {user.dateOfBirth}
+                      </p>
+                    </div>
+                  </motion.div>
+                  <motion.div
+                    whileHover={{ scale: 1.02 }}
+                    className="flex items-center gap-4 p-4 bg-gray-50 dark:bg-gray-700/50 rounded-2xl hover:shadow-md transition-all cursor-pointer"
+                  >
+                    <div className="p-3 bg-pink-100 dark:bg-pink-900/50 rounded-xl">
+                      <FiUser className="text-xl text-gray-900 dark:text-gray-400" />
+                    </div>
+                    <div>
+                      <p className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wider font-medium">
+                        Gender
+                      </p>
+                      <p className="text-gray-800 dark:text-white font-semibold capitalize mt-1">
+                        {user.gender}
+                      </p>
+                    </div>
+                  </motion.div>
                 </CardBody>
               </Card>
             </motion.div>
           </div>
 
-          <div className="lg:col-span-3 space-y-6">
+          <div className="lg:col-span-3">
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.3 }}
+              className="h-full"
             >
-              <Card className="shadow-lg bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
+              <Card className="h-full shadow-lg bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
                 <CardHeader className="flex gap-3 px-6 pt-6">
                   <div className="p-3 bg-red-100 dark:bg-red-900/30 rounded-xl">
                     <MdOutlineLock className="text-2xl text-red-600 dark:text-red-400" />
                   </div>
-                  <h2 className="text-xl font-bold text-gray-800 dark:text-white">Change Password</h2>
+                  <h2 className="text-xl font-bold text-gray-800 dark:text-white">
+                    Change Password
+                  </h2>
                 </CardHeader>
-                <CardBody className="px-6 py-6 space-y-4">
+                <CardBody className="px-6 py-6 flex flex-col justify-between gap-4">
+                  <div className="space-y-10 grow flex flex-col">
                   <Input
                     label="Current Password"
                     ref={passwordInput}
                     type={showPassword ? "text" : "password"}
                     variant="bordered"
+                    size="lg"
                     endContent={
-                      <button type="button" onClick={() => setShowPassword(!showPassword)}>
-                        {showPassword ? <IoEye className="text-xl" /> : <IoEyeOff className="text-xl" />}
+                      <button
+                        type="button"
+                        onClick={() => setShowPassword(!showPassword)}
+                      >
+                        {showPassword ? (
+                          <IoEye className="text-xl" />
+                        ) : (
+                          <IoEyeOff className="text-xl" />
+                        )}
                       </button>
                     }
                   />
@@ -260,12 +312,21 @@ export default function Profile() {
                     ref={resetPasswordInput}
                     type={showRePassword ? "text" : "password"}
                     variant="bordered"
+                    size="lg"
                     endContent={
-                      <button type="button" onClick={() => setShowRePassword(!showRePassword)}>
-                        {showRePassword ? <IoEye className="text-xl" /> : <IoEyeOff className="text-xl" />}
+                      <button
+                        type="button"
+                        onClick={() => setShowRePassword(!showRePassword)}
+                      >
+                        {showRePassword ? (
+                          <IoEye className="text-xl" />
+                        ) : (
+                          <IoEyeOff className="text-xl" />
+                        )}
                       </button>
                     }
                   />
+                  </div>
                   <Button
                     className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold"
                     onPress={resetPassword}
@@ -278,16 +339,12 @@ export default function Profile() {
             </motion.div>
           </div>
 
-          <div className="lg:col-span-3 space-y-6">
+          <div className="lg:col-span-3 space-y-6 mt-7">
             <CreatePostProfile getPost={getPost} />
           </div>
 
-          <div className="lg:col-span-3 space-y-6">
-            <MyPost
-              posts={posts}
-              isLoading={postsLoading}
-              getPost={getPost}
-            />
+          <div className="lg:col-span-3 space-y-6 mt-7">
+            <MyPost posts={posts} isLoading={postsLoading} getPost={getPost} />
           </div>
         </div>
       </div>

@@ -64,7 +64,7 @@ export default function Register() {
           className="text-center mb-6"
         >
           <h1 className="text-3xl lg:text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent mb-3">
-            Join Nexify
+            Join Sphere
           </h1>
           <p className="text-gray-600 dark:text-gray-400 text-lg">
             Create your account and start connecting

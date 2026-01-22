@@ -131,14 +131,6 @@ export default function PostFooter({ post, postComments, setPostComments }) {
         >
           <BiCamera className="w-5 h-5 text-gray-400 dark:text-gray-500" />
         </motion.button>
-
-        <motion.button
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-          className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full transition-colors"
-        >
-          <BsEmojiSmile className="w-5 h-5 text-gray-400 dark:text-gray-500" />
-        </motion.button>
       </div>
 
       {firstComment && (

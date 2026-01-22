@@ -153,7 +153,7 @@ export default function Login() {
           </div>
           <div className="relative flex justify-center text-sm">
             <span className="px-4 bg-white dark:bg-gray-800 text-gray-500 dark:text-gray-400">
-              New to Nexify?
+              New to Sphere?
             </span>
           </div>
         </motion.div>

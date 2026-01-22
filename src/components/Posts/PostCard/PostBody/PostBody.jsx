@@ -40,7 +40,7 @@ export default function PostBody({ post, postComments, setPostComments }) {
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           onClick={() => setIsLiked(!isLiked)}
-          className={`flex items-center gap-2 transition-colors ${
+          className={`cursor-pointer flex items-center gap-2 transition-colors ${
             isLiked
               ? "text-red-500"
               : "hover:text-red-500 dark:hover:text-red-400"
@@ -58,7 +58,7 @@ export default function PostBody({ post, postComments, setPostComments }) {
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           onClick={onOpen}
-          className="flex items-center gap-2 hover:text-blue-500 dark:hover:text-blue-400 transition-colors"
+          className="cursor-pointer flex items-center gap-2 hover:text-blue-500 dark:hover:text-blue-400 transition-colors"
         >
           <BiMessageRounded className="w-6 h-6" />
           <span className="font-medium text-sm">
