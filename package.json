@@ -14,6 +14,7 @@
     "@hookform/resolvers": "^5.2.2",
     "@tailwindcss/vite": "^4.1.18",
     "axios": "^1.13.2",
+    "emoji-picker-react": "^4.17.1",
     "framer-motion": "^12.26.2",
     "motion": "^12.26.2",
     "react": "^19.2.0",

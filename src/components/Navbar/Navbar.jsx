@@ -14,7 +14,7 @@ import {
 import { FiSearch } from "react-icons/fi";
 import { IoNotifications, IoMoon, IoSunny } from "react-icons/io5";
 import { RiMessengerFill } from "react-icons/ri";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import { useContext } from "react";
 import { userContext } from "../../context/UserContext/UserContext.jsx";
 import { useTheme } from "../../context/Theme/ThemeContext.jsx";
@@ -42,9 +42,11 @@ export default function Navbar() {
           whileHover={{ scale: 1.05 }}
           className="flex items-center gap-2"
         >
-          <p className="cursor-pointer font-bold text-2xl bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent">
-            Sphere
-          </p>
+          <Link to={"/home"}>
+            <p className="font-bold text-2xl bg-linear-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent">
+              Sphere
+            </p>
+          </Link>
         </motion.div>
       </NavbarBrand>
 
@@ -65,13 +67,13 @@ export default function Navbar() {
         />
       </NavbarContent>
 
-      <NavbarContent as="div" className="items-center gap-2" justify="end">
+      <NavbarContent as="div" className="items-center gap-3" justify="end">
         {/* Theme Toggle */}
         <motion.button
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
           onClick={toggleTheme}
-          className="cursor-pointer hidden sm:flex rounded-full bg-gray-100 dark:bg-gray-700 p-2.5 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+          className="cursor-pointer flex rounded-full bg-gray-100 dark:bg-gray-700 p-2.5 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
         >
           {theme === "light" ? (
             <IoMoon className="text-xl text-gray-700 dark:text-gray-300" />
@@ -83,7 +85,7 @@ export default function Navbar() {
         {/* Notifications */}
         <motion.div
           whileHover={{ scale: 1.05 }}
-          className="rounded-full bg-gray-100 dark:bg-gray-700 p-2.5 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+          className="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-700 p-2 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
         >
           <Badge color="danger" content="5" size="sm" placement="top-right">
             <IoNotifications className="text-2xl text-gray-700 dark:text-gray-300" />
@@ -93,7 +95,7 @@ export default function Navbar() {
         {/* Messages */}
         <motion.div
           whileHover={{ scale: 1.05 }}
-          className="rounded-full bg-gray-100 dark:bg-gray-700 p-2.5 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+          className="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-700 p-2 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
         >
           <Badge color="danger" content="5" size="sm" placement="top-right">
             <RiMessengerFill className="text-2xl text-gray-700 dark:text-gray-300" />
