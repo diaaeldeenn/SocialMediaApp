@@ -8,7 +8,7 @@ export default function AuthLayout() {
   const { theme, toggleTheme } = useTheme();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 transition-colors duration-500">
+    <div className="min-h-screen bg-linear-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 transition-colors duration-500">
       {/* Theme Toggle Button */}
       <motion.button
         whileHover={{ scale: 1.1 }}
@@ -43,7 +43,7 @@ export default function AuthLayout() {
                 repeat: Infinity,
                 ease: "linear",
               }}
-              className="absolute -top-20 -left-20 w-96 h-96 bg-gradient-to-br from-blue-400/20 to-purple-400/20 dark:from-blue-600/10 dark:to-purple-600/10 rounded-full blur-3xl"
+              className="absolute -top-20 -left-20 w-96 h-96 bg-linear-to-br from-blue-400/20 to-purple-400/20 dark:from-blue-600/10 dark:to-purple-600/10 rounded-full blur-3xl"
             />
             <motion.div
               animate={{
@@ -55,7 +55,7 @@ export default function AuthLayout() {
                 repeat: Infinity,
                 ease: "linear",
               }}
-              className="absolute -bottom-20 -right-20 w-96 h-96 bg-gradient-to-br from-purple-400/20 to-pink-400/20 dark:from-purple-600/10 dark:to-pink-600/10 rounded-full blur-3xl"
+              className="absolute -bottom-20 -right-20 w-96 h-96 bg-linear-to-br from-purple-400/20 to-pink-400/20 dark:from-purple-600/10 dark:to-pink-600/10 rounded-full blur-3xl"
             />
           </div>
 
@@ -76,7 +76,7 @@ export default function AuthLayout() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 }}
-              className="text-5xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent mb-4"
+              className="text-5xl font-bold bg-linear-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent mb-4"
             >
               Sphere
             </motion.h1>

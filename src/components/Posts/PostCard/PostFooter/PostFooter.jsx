@@ -1,5 +1,9 @@
 import { BiCamera } from "react-icons/bi";
-import { BsEmojiSmile, BsThreeDotsVertical, BsFillSendFill } from "react-icons/bs";
+import {
+  BsEmojiSmile,
+  BsThreeDotsVertical,
+  BsFillSendFill,
+} from "react-icons/bs";
 import { IoChevronDown } from "react-icons/io5";
 import formatPostDate from "../postDate.js";
 import {
@@ -41,7 +45,7 @@ export default function PostFooter({ post, postComments, setPostComments }) {
   const showComments = async () => {
     try {
       const res = await getComments(post?._id);
-      setPostComments(res.data.comments);
+      setPostComments(res.data.data.comments);
     } catch (error) {
       console.log(error);
     }
@@ -52,23 +56,21 @@ export default function PostFooter({ post, postComments, setPostComments }) {
 
     const commentData = {
       content: inputComment.current.value,
-      post: post?._id,
     };
 
     setIsLoading(true);
     try {
       if (editingComment?._id) {
-        await updateComment(editingComment._id, commentData.content);
+        await updateComment(post?._id, editingComment._id, commentData.content);
         setEditingComment(null);
-        await showComments();
         toast.success("Comment Updated Successfully", {
           position: "bottom-right",
           theme: "colored",
         });
       } else {
-        const res = await createComment(commentData);
-        setPostComments(res.data.comments);
+        await createComment(post?._id, commentData);
       }
+      await showComments();
       inputComment.current.value = "";
       setSendComment(false);
     } catch (error) {
@@ -80,7 +82,7 @@ export default function PostFooter({ post, postComments, setPostComments }) {
 
   const removeComment = async (commentId) => {
     try {
-      await deleteComment(commentId);
+      await deleteComment(post?._id, commentId);
       await showComments();
       toast.success("Comment Deleted Successfully", {
         position: "bottom-right",
@@ -164,8 +166,7 @@ export default function PostFooter({ post, postComments, setPostComments }) {
             </div>
 
             {userData?._id === post?.user?._id &&
-              userData?._id ===
-                postComments?.[0]?.commentCreator?._id && (
+              userData?._id === postComments?.[0]?.commentCreator?._id && (
                 <Dropdown placement="left-start">
                   <DropdownTrigger className="cursor-pointer">
                     <motion.button

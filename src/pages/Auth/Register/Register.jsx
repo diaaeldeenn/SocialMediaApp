@@ -37,15 +37,14 @@ export default function Register() {
   const setForms = async (formData) => {
     try {
       const res = await signUp(formData);
-      const token = res.data.token;
+      const token = res.data.data.token;
       localStorage.setItem("userToken", token);
       toast.success("Account Created Successfully!", { position: "top-center" });
       refreshUserData();
       navigate("/login", { replace: true });
       reset();
     } catch (error) {
-      console.log(error.response?.data);
-      toast.error(error.response.data.error, { position: "top-center" });
+      toast.error(error.response.data.errors, { position: "top-center" });
     }
   };
 
@@ -63,7 +62,7 @@ export default function Register() {
           transition={{ delay: 0.2 }}
           className="text-center mb-6"
         >
-          <h1 className="text-3xl lg:text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent mb-3">
+          <h1 className="text-3xl lg:text-4xl font-bold bg-linear-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent mb-3">
             Join Sphere
           </h1>
           <p className="text-gray-600 dark:text-gray-400 text-lg">
@@ -242,7 +241,7 @@ export default function Register() {
           >
             <Button
               type="submit"
-              className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold text-lg h-12 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+              className="w-full bg-linear-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold text-lg h-12 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
               isLoading={isSubmitting}
             >
               Create Account

@@ -3,13 +3,22 @@ import PostBody from "./PostBody/PostBody.jsx";
 import PostFooter from "./PostFooter/PostFooter.jsx";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { getComments } from "../../../services/api/comment.api.js";
 
 export default function PostCard({ post, getAllPosts }) {
-  const [postComments, setPostComments] = useState("");
-  
+  const [postComments, setPostComments] = useState([]);
+
   useEffect(() => {
-    setPostComments(post.comments);
-  }, [post.comments]);
+    const fetchComments = async () => {
+      try {
+        const res = await getComments(post._id);
+        setPostComments(res.data.data.comments);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchComments();
+  }, [post._id]);
 
   return (
     <motion.div

@@ -3,12 +3,22 @@ import MyPostHeader from "./PostHeader/MyPostHeader.jsx";
 import MyPostBody from "./PostBody/MyPostBody.jsx";
 import MyPostFooter from "./PostFooter/MyPostFooter.jsx";
 import { motion } from "framer-motion";
+import { getComments } from "../../../../services/api/comment.api.js";
 
 export default function MyPostCard({ post, getPost }) {
-  const [postComments, setPostComments] = useState("");
+  const [postComments, setPostComments] = useState([]);
+
   useEffect(() => {
-    setPostComments(post.comments);
-  }, []);
+    const fetchComments = async () => {
+      try {
+        const res = await getComments(post._id);
+        setPostComments(res.data.data.comments);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchComments();
+  }, [post._id]);
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}

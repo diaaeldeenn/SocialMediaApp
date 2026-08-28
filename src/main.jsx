@@ -11,7 +11,7 @@ createRoot(document.getElementById("root")).render(
     <UserContextProvider>
       <HeroUIProvider>
         <App />
-        <ToastContainer />
+        <ToastContainer theme="colored"/>
       </HeroUIProvider>
     </UserContextProvider>
   </StrictMode>,

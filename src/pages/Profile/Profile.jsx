@@ -24,6 +24,7 @@ import { toast } from "react-toastify";
 import MyPost from "../../components/Posts/PostCard/MyPost/MyPost.jsx";
 import CreatePostProfile from "../../components/Posts/CreatePost/CreatePostProfile/CreatePostProfile.jsx";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 export default function Profile() {
   const { userData, setUserData, isLoading } = useContext(userContext);
@@ -35,13 +36,14 @@ export default function Profile() {
   const resetPasswordInput = useRef("");
   const [posts, setPosts] = useState([]);
   const [postsLoading, setPostsLoading] = useState(false);
+  const navigate = useNavigate();
 
   const getPost = async () => {
     if (!userData?._id) return;
     setPostsLoading(true);
     try {
       const res = await getMyPosts(userData._id);
-      setPosts(res.data?.posts);
+      setPosts(res.data?.data?.posts);
     } catch (error) {
       console.log(error);
     } finally {
@@ -69,6 +71,8 @@ export default function Profile() {
       });
       passwordInput.current.value = "";
       resetPasswordInput.current.value = "";
+      localStorage.clear();
+      navigate("/login");
     } catch (error) {
       console.log(error);
       toast.error("Failed To Change Password", {
@@ -91,7 +95,7 @@ export default function Profile() {
     try {
       await updatePhoto(formData);
       const res = await getProfile();
-      setUserData(res.data.user);
+      setUserData(res.data.data.user);
       toast.success("Photo Updated Successfully", {
         position: "top-center",
         theme: "colored",
@@ -128,8 +132,8 @@ export default function Profile() {
           className="mb-6 bg-white dark:bg-gray-800 rounded-3xl shadow-lg overflow-hidden border border-gray-200 dark:border-gray-700"
         >
           <div className="relative h-48 md:h-64">
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500"></div>
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/20"></div>
+            <div className="absolute inset-0 bg-linear-to-r from-blue-500 via-purple-500 to-pink-500"></div>
+            <div className="absolute inset-0 bg-linear-to-b from-transparent to-black/20"></div>
 
             <div className="absolute -bottom-16 left-6 md:left-10 group">
               <Avatar
@@ -207,7 +211,10 @@ export default function Profile() {
                 </CardHeader>
                 <Divider className="dark:bg-gray-700" />
                 <CardBody className="px-6 py-6 space-y-4">
-                  <motion.div whileHover={{ scale: 1.02 }} className="hover:shadow-md transition-all cursor-pointer flex items-center gap-4 p-4 bg-gray-50 dark:bg-gray-700/50 rounded-2xl">
+                  <motion.div
+                    whileHover={{ scale: 1.02 }}
+                    className="hover:shadow-md transition-all cursor-pointer flex items-center gap-4 p-4 bg-gray-50 dark:bg-gray-700/50 rounded-2xl"
+                  >
                     <div className="p-3 bg-blue-100 dark:bg-blue-900/50 rounded-xl">
                       <FiUser className="text-xl text-blue-600 dark:text-blue-400" />
                     </div>
@@ -220,7 +227,10 @@ export default function Profile() {
                       </p>
                     </div>
                   </motion.div>
-                  <motion.div whileHover={{ scale: 1.02 }} className="hover:shadow-md transition-all cursor-pointer flex items-center gap-4 p-4 bg-gray-50 dark:bg-gray-700/50 rounded-2xl">
+                  <motion.div
+                    whileHover={{ scale: 1.02 }}
+                    className="hover:shadow-md transition-all cursor-pointer flex items-center gap-4 p-4 bg-gray-50 dark:bg-gray-700/50 rounded-2xl"
+                  >
                     <div className="p-3 bg-green-100 dark:bg-green-900/50 rounded-xl">
                       <FiMail className="text-xl text-green-600 dark:text-green-400" />
                     </div>
@@ -288,47 +298,47 @@ export default function Profile() {
                 </CardHeader>
                 <CardBody className="px-6 py-6 flex flex-col justify-between gap-4">
                   <div className="space-y-10 grow flex flex-col">
-                  <Input
-                    label="Current Password"
-                    ref={passwordInput}
-                    type={showPassword ? "text" : "password"}
-                    variant="bordered"
-                    size="lg"
-                    endContent={
-                      <button
-                        type="button"
-                        onClick={() => setShowPassword(!showPassword)}
-                      >
-                        {showPassword ? (
-                          <IoEye className="text-xl" />
-                        ) : (
-                          <IoEyeOff className="text-xl" />
-                        )}
-                      </button>
-                    }
-                  />
-                  <Input
-                    label="New Password"
-                    ref={resetPasswordInput}
-                    type={showRePassword ? "text" : "password"}
-                    variant="bordered"
-                    size="lg"
-                    endContent={
-                      <button
-                        type="button"
-                        onClick={() => setShowRePassword(!showRePassword)}
-                      >
-                        {showRePassword ? (
-                          <IoEye className="text-xl" />
-                        ) : (
-                          <IoEyeOff className="text-xl" />
-                        )}
-                      </button>
-                    }
-                  />
+                    <Input
+                      label="Current Password"
+                      ref={passwordInput}
+                      type={showPassword ? "text" : "password"}
+                      variant="bordered"
+                      size="lg"
+                      endContent={
+                        <button
+                          type="button"
+                          onClick={() => setShowPassword(!showPassword)}
+                        >
+                          {showPassword ? (
+                            <IoEye className="text-xl" />
+                          ) : (
+                            <IoEyeOff className="text-xl" />
+                          )}
+                        </button>
+                      }
+                    />
+                    <Input
+                      label="New Password"
+                      ref={resetPasswordInput}
+                      type={showRePassword ? "text" : "password"}
+                      variant="bordered"
+                      size="lg"
+                      endContent={
+                        <button
+                          type="button"
+                          onClick={() => setShowRePassword(!showRePassword)}
+                        >
+                          {showRePassword ? (
+                            <IoEye className="text-xl" />
+                          ) : (
+                            <IoEyeOff className="text-xl" />
+                          )}
+                        </button>
+                      }
+                    />
                   </div>
                   <Button
-                    className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold"
+                    className="w-full bg-linear-to-r from-blue-600 to-purple-600 text-white font-semibold"
                     onPress={resetPassword}
                     isLoading={loading}
                   >

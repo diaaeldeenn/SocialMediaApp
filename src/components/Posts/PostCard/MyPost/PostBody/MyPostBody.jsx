@@ -26,7 +26,7 @@ export default function MyPostBody({ post, postComments,setPostComments  }) {
         >
           <img
             src={post.image}
-            className="w-full object-cover max-h-[600px] cursor-pointer hover:opacity-95 transition-opacity"
+            className="w-full object-cover max-h-150 cursor-pointer hover:opacity-95 transition-opacity"
             alt="post"
             onClick={() => window.open(post.image, "_blank")}
           />

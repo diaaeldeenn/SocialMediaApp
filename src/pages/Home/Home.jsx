@@ -16,7 +16,7 @@ export default function Home() {
     setIsLoading(true);
     try {
       const res = await getAllPosts();
-      setPosts(res.data?.posts);
+      setPosts(res.data?.data?.posts);
     } catch (error) {
       console.log(error);
     } finally {
@@ -95,7 +95,7 @@ export default function Home() {
                     key={item}
                     className="flex items-center gap-3 p-3 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer transition-all"
                   >
-                    <div className="w-12 h-12 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full"></div>
+                    <div className="w-12 h-12 bg-linear-to-br from-blue-400 to-purple-500 rounded-full"></div>
                     <div className="flex-1">
                       <p className="text-sm font-semibold text-gray-800 dark:text-white">
                         User {item}

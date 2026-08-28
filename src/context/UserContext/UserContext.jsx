@@ -12,7 +12,7 @@ export default function UserContextProvider({ children }) {
     setIsLoading(true);
     try {
       const res = await getProfile();
-      setUserData(res.data.user);
+      setUserData(res.data.data.user);
     } catch (error) {
       console.error("Error fetching user data:", error);
       setUserData(null);
